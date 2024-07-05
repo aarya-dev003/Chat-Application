@@ -10,14 +10,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.aarya.chatapplication.presentation.chat.ChatScreen
-import com.aarya.chatapplication.presentation.chat.ChatViewModel
 import com.aarya.chatapplication.presentation.username.UsernameScreen
 import com.aarya.chatapplication.ui.theme.ChatApplicationTheme
 
@@ -25,7 +23,6 @@ import com.aarya.chatapplication.ui.theme.ChatApplicationTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val chatViewModel = ViewModelProvider(this)[ChatViewModel::class.java]
         setContent {
             ChatApplicationTheme {
                 // A surface container using the 'background' color from the theme

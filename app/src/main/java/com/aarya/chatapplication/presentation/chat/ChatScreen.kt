@@ -44,13 +44,12 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun ChatScreen(
     username : String?,
-    viewModel: ChatViewModel = koinViewModel<ChatViewModel>()
+    viewModel: ChatViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     LaunchedEffect(key1 = true) {
         viewModel.toastEvent.collectLatest { message ->
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-
         }
     }
 

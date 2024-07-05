@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
+
 class ChatViewModel(
     private val messageService: MessageService,
     private val chatSocketService: ChatSocketService,
@@ -32,29 +33,29 @@ class ChatViewModel(
 
     fun connectToChat() {
         getAllMessages()
-        savedStateHandle.get<String>("username")?. let { username ->
+        savedStateHandle.get<String>("username")?.let { username ->
             viewModelScope.launch {
                 val result = chatSocketService.initSession(username)
                 when(result) {
                     is Resource.Success -> {
                         chatSocketService.observeMessages()
-                            .onEach {message ->
-                                val newList = state.value.messages.toMutableStateList().apply {
+                            .onEach { message ->
+                                val newList = state.value.messages.toMutableList().apply {
                                     add(0, message)
                                 }
-                                _state.value.copy(
+                                _state.value = state.value.copy(
                                     messages = newList
                                 )
-
                             }.launchIn(viewModelScope)
-                    }is Resource.Error -> {
-                        _toastEvent.emit(result.message ?: "Unknown Error")
                     }
-
+                    is Resource.Error -> {
+                        _toastEvent.emit(result.message ?: "Unknown error")
+                    }
                 }
             }
         }
     }
+
 
     fun onMessageChange(message : String){
         _messageText.value = message

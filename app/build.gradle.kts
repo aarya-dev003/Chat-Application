@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
 
-    kotlin("plugin.serialization") version "1.9.22"
+    kotlin("plugin.serialization") version "1.9.0"
 }
 
 android {
@@ -75,6 +75,8 @@ dependencies {
     //koin dependency
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
+    implementation(libs.koin.compose)
+    implementation(libs.koin.androidx.compose.navigation)
 
     // Compose dependencies
     implementation(libs.androidx.lifecycle.viewmodel.compose)
@@ -96,5 +98,11 @@ dependencies {
     implementation(libs.logback.classic)
     implementation(libs.ktor.client.content.negotiation )
 
-    implementation(libs.ktor.serialization.kotlinx.json)
+    //serialization kotlinx
+    implementation(libs.kotlinx.serialization.json.jvm)
+    implementation(libs.ktor.client.serialization)
+
+    implementation(libs.slf4j.api)
+
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.11")
 }

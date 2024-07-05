@@ -23,7 +23,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun UsernameScreen(
-    viewModel: UsernameViewModel =  koinViewModel<UsernameViewModel>(),
+    viewModel: UsernameViewModel =  koinViewModel(),
     onNavigate: (String) -> Unit
 ) {
 
