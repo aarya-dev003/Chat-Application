@@ -39,11 +39,12 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.androidx.compose.getViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ChatScreen(
-    username : String?,
+    username: String?,
     viewModel: ChatViewModel = koinViewModel()
 ) {
     val context = LocalContext.current

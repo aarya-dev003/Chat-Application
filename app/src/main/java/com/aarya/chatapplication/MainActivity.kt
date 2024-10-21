@@ -18,40 +18,43 @@ import androidx.navigation.navArgument
 import com.aarya.chatapplication.presentation.chat.ChatScreen
 import com.aarya.chatapplication.presentation.username.UsernameScreen
 import com.aarya.chatapplication.ui.theme.ChatApplicationTheme
-
+import org.koin.androidx.compose.koinViewModel
+import androidx.lifecycle.SavedStateHandle
+import com.aarya.chatapplication.presentation.chat.ChatViewModel
+import org.koin.core.parameter.parametersOf
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ChatApplicationTheme {
-                // A surface container using the 'background' color from the theme
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
                     startDestination = "username_screen"
-                    ){
-                    composable("username_screen"){
+                ) {
+                    composable("username_screen") {
                         UsernameScreen(onNavigate = navController::navigate)
                     }
 
                     composable(
                         route = "chat_screen/{username}",
                         arguments = listOf(
-                            navArgument(name = "username"){
+                            navArgument(name = "username") {
                                 type = NavType.StringType
-                                nullable =true
+                                nullable = true
                             }
                         )
-                    ){
-                        val username = it.arguments?.getString("username")
-                        ChatScreen(username = username)
+                    ) { backStackEntry ->
+                        val username = backStackEntry.arguments?.getString("username")
+                        // Get the SavedStateHandle from the backStackEntry
+                        val savedStateHandle: SavedStateHandle = backStackEntry.savedStateHandle
+                        // Pass the SavedStateHandle to the ViewModel
+                        val chatViewModel: ChatViewModel = koinViewModel(parameters = { parametersOf(savedStateHandle) })
+                        ChatScreen(username = username, viewModel = chatViewModel)
                     }
-
-
                 }
             }
         }
     }
 }
-

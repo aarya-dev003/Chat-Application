@@ -18,10 +18,10 @@ interface ChatSocketService {
     suspend fun closeSession()
 
     companion object{
-        const val BASE_URL = "ws://aaryaworks.tech"
+        const val BASE_URL = "ws://52.172.9.239:8082"
     }
 
     sealed class EndPoints(val url: String){
-        object ChatSocket: EndPoints("$BASE_URL/chat-socket")
+        object ChatSocket: EndPoints("$BASE_URL/chat")
     }
 }

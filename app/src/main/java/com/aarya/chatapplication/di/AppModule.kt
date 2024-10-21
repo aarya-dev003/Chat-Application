@@ -1,5 +1,6 @@
 package com.aarya.chatapplication.di
 
+import androidx.lifecycle.SavedStateHandle
 import com.aarya.chatapplication.data.remote.ChatSocketService
 import com.aarya.chatapplication.data.remote.ChatSocketServiceImpl
 import com.aarya.chatapplication.data.remote.MessageService
@@ -40,12 +41,12 @@ val appModule = module {
     single<MessageService>{MessageServiceImpl(get())}
     single<ChatSocketService>{ ChatSocketServiceImpl(get()) }
     viewModel{ UsernameViewModel()}
-    viewModel {
-//        (savedStateHandle: SavedStateHandle) ->
+    viewModel { (savedStateHandle: SavedStateHandle) ->
         ChatViewModel(
-            get(),
-            get(),
-            get()
+            messageService = get(),
+            chatSocketService = get(),
+            savedStateHandle = savedStateHandle
         )
     }
+
 }

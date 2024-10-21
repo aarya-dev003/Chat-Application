@@ -58,6 +58,7 @@ koin-androidx-compose-navigation = {group = "io.insert-koin", name = "koin-andro
 slf4j-api = {group ="org.slf4j", name = "slf4j-api", version.ref = "slf4j"}
 
 
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

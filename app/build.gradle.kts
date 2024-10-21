@@ -93,6 +93,8 @@ dependencies {
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.cio)
     implementation(libs.ktor.client.serialization)
+//    implementation("io.ktor:ktor-client-auth:3.6.0-wasm-alpha2")
+//    implementation("io.ktor:ktor-client-json:3.6.0-wasm-alpha2")
     implementation(libs.ktor.client.websockets)
     implementation(libs.ktor.client.logging)
     implementation(libs.logback.classic)
